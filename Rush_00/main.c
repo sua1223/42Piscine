@@ -1,26 +1,20 @@
-#include <unistd.h>
-#include <stdio.h>
-#include "rush04.c"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sujang <sujang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/10 14:30:54 by sujang            #+#    #+#             */
+/*   Updated: 2021/10/10 14:30:56 by sujang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-int main()
+#include <unistd.h>
+void	rush(int a, int b);
+
+int	main(void)
 {
-  printf("(5,3)\n");
-  rush(5,3);
-  printf("(5,1)\n");
-  rush(5,1);
-  printf("(1,5)\n");
-  rush(1,5);
-  printf("(1,1)\n");
-  rush(1,1);
-  printf("(4,4)\n");
-  rush(4,4);
-  printf("(4,0)\n");
-  rush(4,0);
-  printf("(0,4)\n");
-  rush(0,4);
-  printf("(0,0)\n");
-  rush(0,0);
-  printf("(-1,4)\n");
-  rush(-1,4);
-  return (0);
+	rush(5, 3);
+	return (0);
 }
