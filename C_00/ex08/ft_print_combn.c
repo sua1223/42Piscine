@@ -1,44 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_comb2.c                                   :+:      :+:    :+:   */
+/*   ft_print_combn.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sujang <sujang@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 09:42:14 by sujang            #+#    #+#             */
-/*   Updated: 2021/10/12 09:51:34 by sujang           ###   ########.fr       */
+/*   Created: 2021/10/10 16:59:22 by sujang            #+#    #+#             */
+/*   Updated: 2021/10/12 09:55:12 by sujang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+
+int	g_flag;
 
 void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
-void	ft_print_comb2(void)
+void	combination(int arr[10], int index, int n, int target)
 {
-	int	a;
-	int	b;
+	int	i;
 
-	a = 0;
-	while (a <= 98)
+	if (n == 0)
 	{
-		b = a + 1;
-		while (b <= 99)
+		if (g_flag)
 		{
-			ft_putchar(a / 10 + '0');
-			ft_putchar(a % 10 + '0');
-			ft_putchar(' ');
-			ft_putchar(b / 10 + '0');
-			ft_putchar(b % 10 + '0');
-			if (a != 98 || b != 99)
-			{
-				write(1, ", ", 2);
-			}
-			b++;
+			write(1, ", ", 2);
 		}
-		a++;
+		i = 0;
+		while (i < index)
+		{
+			ft_putchar(arr[i] + '0');
+			i++;
+		}
+		g_flag = 1;
 	}
+	else
+	{
+		if (target <= 9)
+		{
+			arr[index] = target;
+			combination(arr, index + 1, n - 1, target + 1);
+			combination(arr, index, n, target + 1);
+		}
+	}
+}
+
+void	ft_print_combn(int n)
+{
+	int	arr[10];
+
+	g_flag = 0;
+	combination(arr, 0, n, 0);
 }

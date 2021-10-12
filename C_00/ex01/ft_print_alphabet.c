@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_comb.c                                    :+:      :+:    :+:   */
+/*   ft_print_alphabet.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sujang <sujang@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 09:37:33 by sujang            #+#    #+#             */
-/*   Updated: 2021/10/12 09:41:39 by sujang           ###   ########.fr       */
+/*   Created: 2021/10/07 20:42:25 by sujang            #+#    #+#             */
+/*   Updated: 2021/10/10 09:42:13 by sujang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_print_comb(void)
+void	ft_putchar(char c)
 {
-	char	i;
-	char	j;
-	char	k;
+	write(1, &c, 1);
+}
 
-	i = '0' - 1;
-	while (++i <= '7')
+void	ft_print_alphabet(void)
+{
+	char	c;
+
+	c = 'a';
+	while (c <= 'z')
 	{
-		j = i;
-		while (++j <= '8')
-		{
-			k = j;
-			while (++k <= '9')
-			{
-				write(1, &i, 1);
-				write(1, &j, 1);
-				write(1, &k, 1);
-				if (i != '7' || j != '8' || k != '9')
-				{
-					write(1, ", ", 2);
-				}
-			}
-		}
+		ft_putchar(c);
+		c++;
 	}
 }

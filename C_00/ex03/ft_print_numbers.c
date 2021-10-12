@@ -1,40 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_comb.c                                    :+:      :+:    :+:   */
+/*   ft_print_numbers.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sujang <sujang@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 09:37:33 by sujang            #+#    #+#             */
-/*   Updated: 2021/10/12 09:41:39 by sujang           ###   ########.fr       */
+/*   Created: 2021/10/10 09:45:31 by sujang            #+#    #+#             */
+/*   Updated: 2021/10/10 10:07:19 by sujang           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_print_comb(void)
+void	ft_print_numbers(void)
 {
-	char	i;
-	char	j;
-	char	k;
+	int	digit;
 
-	i = '0' - 1;
-	while (++i <= '7')
+	digit = '0';
+	while (digit <= '9')
 	{
-		j = i;
-		while (++j <= '8')
-		{
-			k = j;
-			while (++k <= '9')
-			{
-				write(1, &i, 1);
-				write(1, &j, 1);
-				write(1, &k, 1);
-				if (i != '7' || j != '8' || k != '9')
-				{
-					write(1, ", ", 2);
-				}
-			}
-		}
+		write(1, &digit, 1);
+		digit++;
 	}
 }
