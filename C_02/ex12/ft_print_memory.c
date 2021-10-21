@@ -1,23 +1,40 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_memory.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sujang <sujang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/14 14:39:09 by sujang            #+#    #+#             */
+/*   Updated: 2021/10/14 14:42:33 by sujang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 
-void	print_addr(unsigned long long addr, unsigned int cnt, char *hex)
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	addr_hex(unsigned long long addr, unsigned int cnt, char *hex)
 {
 	if (addr != 0)
 	{
 		addr_hex(addr / 16, cnt + 1, hex);
-		write(1, &hex[addr % 16], 1);
+		ft_putchar(hex[addr % 16]);
 	}
 	else
 	{
 		while (cnt < 16)
 		{
-			write(1, "0", 1);
+			ft_putchar('0');
 			cnt ++;
 		}
 	}
 }
 
-void	print_char(unsigned char *addr, unsigned int len, char *hex, char *str)
+void	print_hex(unsigned char *addr, unsigned int len, char *hex, char *str)
 {
 	unsigned int	i;
 
@@ -25,19 +42,19 @@ void	print_char(unsigned char *addr, unsigned int len, char *hex, char *str)
 	while (i < len)
 	{
 		if (i % 2 == 0)
-			write(1, " ", 1);
+			ft_putchar(' ');
 		if (' ' <= addr[i] && addr[i] <= '~')
 			str[i] = addr[i];
 		else
 			str[i] = '.';
-		write(1, &hex[(int)addr[i] / 16], 1);
-		write(1, &(hex[(int)addr[i] % 16], 1);
+		ft_putchar(hex[(int)addr[i] / 16]);
+		ft_putchar(hex[(int)addr[i] % 16]);
 		i++;
 	}
 	while (i < 16)
 	{
 		if (i % 2 == 0)
-			write(1, " ", 1);
+			ft_putchar(' ');
 		write(1, "  ", 2);
 		i++;
 	}
@@ -58,12 +75,12 @@ void	ft_print_memory(void *addr, unsigned int size)
 			tmp = 16;
 		else
 			tmp = size;
-		print_addr((unsigned long long)addr + i, 0, hex);
-		write(1, ":", 1);
-		print_char((unsigned char *)addr + i, tmp, hex, str);
-		write(1, " ", 1);
+		addr_hex((unsigned long long)addr + i, 0, hex);
+		ft_putchar(':');
+		print_hex((unsigned char *)addr + i, tmp, hex, str);
+		ft_putchar(' ');
 		write(1, str, tmp);
-		write(1, "\n", 1);
+		ft_putchar('\n');
 		size -= tmp;
 		i += 16;
 	}
