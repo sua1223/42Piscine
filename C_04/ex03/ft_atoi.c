@@ -1,94 +1,52 @@
-#include <stdio.h>
-
-int isDigit(char c)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sujang <sujang@student.42seoul.kr>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/10/24 12:12:25 by sujang            #+#    #+#             */
+/*   Updated: 2021/10/24 15:28:47 by sujang           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+int	is_digit(char c)
 {
-	if(c >= '0' && c <= '9')
+	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
 }
 
-int isSigned(char *str)
+int	is_space(char c)
 {
-	int i;
-	int cnt;
-	i = 0;
-	cnt = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == '-')
-			cnt++;
-		i++;
-	}
-	return (cnt);
-}
-
-int startIndex(char *str)
-{
-	int i;
-	while (str[i] != '\0')
-	{
-		if (str[i] == ' ')
-		{
-			i++;
-			continue;
-		}
-		if (isDigit(str[i]))
-			return(i);
-		else
-			return(-1);
-	}
+	if (c >= 9 && c <= 13)
+		return (1);
+	else if (c == ' ')
+		return (1);
 	return (0);
 }
 
-int init(char *str)
+int	ft_atoi(char *str)
 {
-	int i;
-	int result;
+	int	i;
+	int	minus;
+	int	result;
+
 	i = 0;
-	while (str[i] != '\0')
+	minus = 1;
+	result = 0;
+	while (is_space(str[i]))
+		i++;
+	while (str[i] == '-' || str[i] == '+')
 	{
-		if(isDigit(str[i]))
-		{
-			result = str[i] - '0';
-			return (result);
-		}
+		if (str[i] == '-')
+			minus *= -1;
 		i++;
 	}
-	return (-1);
-}
-
-int ft_atoi(char *str)
-{
-	int idx;
-	int result;
-	int minus;
-
-	idx = startIndex(str)-1;
-	minus = isSigned(str);
-	result = init(str);
-	if (idx == -1 || result == -1)
-		return (0);
-	while (str[idx] != '\0')
+	while (str[i] != '\0' && is_digit(str[i]))
 	{
-		if (isDigit(str[idx]))
-		{
-			result *= 10;
-			result += str[idx];
-		}
-		else
-			break;
-		idx++;				
+		result *= 10;
+		result += str[i] - '0';
+		i++;
 	}
-	if (minus == 1)
-		return (result * -1);
-	return (result);
-}
-
-int main()
-{
-	int result;
-	char test[] = "   ---+--+1234ab567";
-
-	result = ft_atoi(test);
-	printf("%d\n", result);
+	return (result * minus);
 }
